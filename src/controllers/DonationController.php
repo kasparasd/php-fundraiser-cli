@@ -18,7 +18,7 @@ class DonationController
     {
         $id = $this->argv[2];
         $amount = $this->argv[3];
-        $donator = $this->argv[4];
+        $donator = trim($this->argv[4], "'\"");
 
         if ($amount <= 0) {
             return CliPrinter::error("Amount should be positive");
@@ -30,7 +30,7 @@ class DonationController
             return CliPrinter::error("Donator name should be no longer than 50 characters");
         }
 
-        $state = $this->donation->add($id, $amount, str_replace('_', ' ', $donator));
+        $state = $this->donation->add($id, $amount, $donator);
 
         if ($state) {
             CliPrinter::message('Donation successfully added');
