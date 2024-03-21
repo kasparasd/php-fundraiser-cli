@@ -8,7 +8,9 @@ use App\controllers\DonationController;
 use App\controllers\CharityController;
 use App\MariaDbConfig;
 
-$env = __DIR__ . "/.env";
+
+
+define("ENV", __DIR__ . "/.env");
 define('CSVlocation', __DIR__ . '/csv/' );
 
 $commands = new Commands($argv);
@@ -20,7 +22,7 @@ $commands->registerCommand('edit', [CharityController::class, 'update'], 'To edi
 $commands->registerCommand('delete', [CharityController::class, 'destroy'], 'To delete charity run: php index.php delete [charity id]');
 $commands->registerCommand('donate', [DonationController::class, 'add'], 'To make a donation to charity run: php index.php donate [charity id] [amount] ["Donator name"]');
 
-$mariaDbConfig = (new MariaDbConfig($env))->mariaDbConfig();
+$mariaDbConfig = (new MariaDbConfig(ENV))->mariaDbConfig();
 
 
 $app = (new App($commands, $argv))->connectDb($mariaDbConfig)->run();

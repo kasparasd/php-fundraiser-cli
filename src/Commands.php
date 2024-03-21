@@ -8,6 +8,7 @@ class Commands
 
     public function __construct(private array $argv = [])
     {
+        $this->registerCommand('db', ['', ''], 'To create DB tables run: php index.php db');
         $this->registerCommand('help', ['', ''], 'To see all available commands run: php index.php help');
     }
 

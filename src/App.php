@@ -15,6 +15,10 @@ class App
         if (count($this->argv) <= 1 || $this->argv[1] === 'help') {
             return $this->help();
         }
+
+        if ($this->argv[1] === 'db') {
+            return CreateTables::create();
+        }
         return $this->commands->runCommand();
     }
 
