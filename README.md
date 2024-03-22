@@ -6,6 +6,7 @@
 To see all available commands run: php index.php help
 
 There's one csv file in csv folder, you can add these charities with command: php index.php csv charities.csv
+
 If you want to add your own csv file, please put it in csv folder. And run command: php index.php csv yourFileName.csv
 
 Task:
