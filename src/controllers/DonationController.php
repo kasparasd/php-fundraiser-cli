@@ -1,9 +1,9 @@
 <?php
 
-namespace App\controllers;
+namespace src\controllers;
 
-use App\CliPrinter;
-use App\models\Donation;
+use src\CliPrinter;
+use src\models\Donation;
 
 class DonationController
 {

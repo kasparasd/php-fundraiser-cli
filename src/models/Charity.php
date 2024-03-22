@@ -1,8 +1,8 @@
 <?php
 
-namespace App\models;
+namespace src\models;
 
-use App\Model;
+use src\Model;
 
 class Charity extends Model
 {

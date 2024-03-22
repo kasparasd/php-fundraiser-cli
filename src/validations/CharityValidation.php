@@ -1,8 +1,6 @@
 <?php
 
-namespace App\validations;
-
-use App\CliPrinter;
+namespace src\validations;
 
 class CharityValidation
 {

@@ -2,11 +2,11 @@
 
 require 'autoload.php';
 
-use App\App;
-use App\Commands;
-use App\controllers\DonationController;
-use App\controllers\CharityController;
-use App\MariaDbConfig;
+use src\App;
+use src\Commands;
+use src\controllers\DonationController;
+use src\controllers\CharityController;
+use src\MariaDbConfig;
 
 
 

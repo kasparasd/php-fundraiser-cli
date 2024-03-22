@@ -1,10 +1,10 @@
 <?php
 
-namespace App\controllers;
+namespace src\controllers;
 
-use App\CliPrinter;
-use App\models\Charity;
-use App\validations\CharityValidation;
+use src\CliPrinter;
+use src\models\Charity;
+use src\validations\CharityValidation;
 
 class CharityController
 {

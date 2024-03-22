@@ -1,9 +1,9 @@
 <?php
 
-namespace App\models;
+namespace src\models;
 
-use App\CliPrinter;
-use App\Model;
+use src\CliPrinter;
+use src\Model;
 
 class Donation extends Model
 {
