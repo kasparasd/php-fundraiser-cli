@@ -22,7 +22,7 @@ $commands->registerCommand('edit', [CharityController::class, 'update'], 'To edi
 $commands->registerCommand('delete', [CharityController::class, 'destroy'], 'To delete charity run: php index.php delete [charity id]');
 $commands->registerCommand('donate', [DonationController::class, 'add'], 'To make a donation to charity run: php index.php donate [charity id] [amount] ["Donator name"]');
 
-$mariaDbConfig = (new MariaDbConfig(ENV))->mariaDbConfig();
+$mariaDbConfig = (new MariaDbConfig())->mariaDbConfig();
 
 
 $app = (new App($commands, $argv))->connectDb($mariaDbConfig)->run();

@@ -4,10 +4,6 @@ namespace src;
 
 class MariaDbConfig extends Config
 {
-    public function __construct($env)
-    {
-        parent::__construct($env);
-    }
 
     public function mariaDbConfig()
     {

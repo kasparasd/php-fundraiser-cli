@@ -5,9 +5,9 @@ namespace src;
 abstract class Config
 {
     protected array $config;
-    public function __construct($env)
+    public function __construct()
     {
-        $this->config = parse_ini_file($env);
+        $this->config = parse_ini_file(ENV);
     }
 
     public function getItem($name)
