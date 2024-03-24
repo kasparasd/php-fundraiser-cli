@@ -9,6 +9,7 @@ use src\validations\CharityValidation;
 class CharityController
 {
     private Charity $charity;
+
     public function __construct(private array $argv)
     {
         $this->charity = new Charity();
@@ -20,10 +21,12 @@ class CharityController
         if (count($charities) === 0) {
             return CliPrinter::message("There are no active charities.");
         }
+
         foreach ($charities as $value) {
             CliPrinter::message("Charity: #id: $value->id, name: $value->name, Email: $value->email");
         }
     }
+
     public function store()
     {
         if (!CharityValidation::hasValidInputCount($this->argv, 4)) {
@@ -40,10 +43,15 @@ class CharityController
         if (!CharityValidation::email($email)) {
             return CliPrinter::error("Email is not valid");
         }
+        $status = $this->charity->store($name, $email);
 
-        $this->charity->store($name, $email);
-        CliPrinter::message("New charity successfully added");
+        if ($status === true) {
+            return CliPrinter::message("New charity successfully added");
+        } elseif ($status[1] === 1062) {
+            return CliPrinter::error("This charity already exists");
+        };
     }
+
     public function update()
     {
         if (!CharityValidation::hasValidInputCount($this->argv, 5)) {
@@ -63,9 +71,16 @@ class CharityController
         if (!$this->find($id)) {
             return CliPrinter::error("Charity with this id: $id does not exist");
         }
-        $this->charity->update($id, $name, $email);
-        CliPrinter::message("Charity successfully updated");
+
+        $status = $this->charity->update($id, $name, $email);
+
+        if ($status === true) {
+            return CliPrinter::message("Charity successfully updated");
+        } elseif ($status[1] === 1062) {
+            return CliPrinter::error("This charity already exists");
+        };
     }
+
     public function destroy()
     {
         $id = $this->argv[2];

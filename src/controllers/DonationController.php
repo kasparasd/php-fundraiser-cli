@@ -29,10 +29,12 @@ class DonationController
             return CliPrinter::error("Donator name should be no longer than 50 characters");
         }
 
-        $state = $this->donation->add($id, $amount, $donator);
+        $status = $this->donation->add($id, $amount, $donator);
 
-        if ($state) {
-            CliPrinter::message('Donation successfully added');
-        }
+        if ($status === true) {
+            return CliPrinter::message('Donation successfully added');
+        } elseif ($status[1] === 1452) {
+            return CliPrinter::error("Charity with this id: $id does not exist");
+        };
     }
 }

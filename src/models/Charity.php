@@ -15,22 +15,34 @@ class Charity extends Model
     }
     public function store($name, $email)
     {
-        $sql = "INSERT INTO charities (name, email) VALUES (:name, :email)";
+        try {
+            $sql = "INSERT INTO charities (name, email) VALUES (:name, :email)";
 
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+
+            return true;
+        } catch (\Exception) {
+            return $stmt->errorInfo();
+        }
     }
     public function update($id, $name, $email)
     {
-        $sql = "UPDATE charities SET name = :name, email = :email WHERE id = :id";
+        try {
+            $sql = "UPDATE charities SET name = :name, email = :email WHERE id = :id";
 
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            return true;
+        } catch (\PDOException) {
+            return $stmt->errorInfo();
+        }
     }
     public function destroy($id)
     {

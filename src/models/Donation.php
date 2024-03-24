@@ -21,16 +21,9 @@ class Donation extends Model
             $stmt->bindParam(':charity_id', $charity_id);
             $stmt->bindParam(':date_time', $date_time);
             $stmt->execute();
-        } catch (\PDOException $e) {
-            if ($e->getCode() == 23000) {
-                CliPrinter::error("Charity id: $charity_id does not exist. 
-                To see charities run: php index.php charities");
-            } else {
-                CliPrinter::error($e->getMessage());
-            }
-            return false;
+            return true;
+        } catch (\PDOException) {
+            return $stmt->errorInfo();
         }
-
-        return true;
     }
 }
