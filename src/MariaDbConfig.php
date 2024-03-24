@@ -4,7 +4,6 @@ namespace src;
 
 class MariaDbConfig extends Config
 {
-
     public function mariaDbConfig()
     {
         $config = [

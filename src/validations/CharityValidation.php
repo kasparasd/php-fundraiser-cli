@@ -4,22 +4,10 @@ namespace src\validations;
 
 class CharityValidation
 {
-    public static function inputs($inputs)
+    public static function hasValidInputCount($inputs, $expectedInputsCount)
     {
-        if ($inputs[1] === 'create' || $inputs[1] === 'excel') {
-            if (count($inputs) < 4) {
-                return false;
-            }
-            if (count($inputs) > 4) {
-                return false;
-            }
-        } else if ($inputs[1] === 'edit') {
-            if (count($inputs) < 5) {
-                return false;
-            }
-            if (count($inputs) > 5) {
-                return false;
-            }
+        if (count($inputs) !== $expectedInputsCount) {
+            return false;
         }
         return true;
     }
@@ -30,14 +18,13 @@ class CharityValidation
         }
         return true;
     }
-    public static function name($name)
+    public static function hasValidNameLength($name, $minLength, $maxLength)
     {
-        if (strlen($name) < 8) {
+        $nameLength = strlen($name);
+        if ($nameLength < $minLength || $nameLength > $maxLength) {
             return false;
         }
-        if (strlen($name) > 50) {
-            return false;
-        }
+
         return true;
     }
 }

@@ -6,7 +6,6 @@ use src\Model;
 
 class Charity extends Model
 {
-
     public function findAll()
     {
         $stmt = 'SELECT * FROM charities';
@@ -17,11 +16,10 @@ class Charity extends Model
     public function store($name, $email)
     {
         $sql = "INSERT INTO charities (name, email) VALUES (:name, :email)";
-        $stmt = $this->db->prepare($sql);
 
+        $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':email', $email);
-
         $stmt->execute();
     }
     public function update($id, $name, $email)
@@ -29,11 +27,9 @@ class Charity extends Model
         $sql = "UPDATE charities SET name = :name, email = :email WHERE id = :id";
 
         $stmt = $this->db->prepare($sql);
-
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':id', $id);
-
         $stmt->execute();
     }
     public function destroy($id)
@@ -41,15 +37,14 @@ class Charity extends Model
         $sql = "DELETE FROM charities WHERE id = :id";
 
         $stmt = $this->db->prepare($sql);
-
         $stmt->bindParam(':id', $id);
-
         $stmt->execute();
     }
 
     public function find($id)
     {
         $sql = "SELECT * FROM charities WHERE id = :id";
+
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();

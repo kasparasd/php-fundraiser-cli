@@ -6,7 +6,6 @@ use PDO;
 
 class Db
 {
-
     private PDO $pdo;
 
     public function __construct($dbConfig)
@@ -25,6 +24,6 @@ class Db
 
     public function __call($method, $args)
     {
-       return call_user_func_array([$this->pdo, $method], $args);
+        return call_user_func_array([$this->pdo, $method], $args);
     }
 }

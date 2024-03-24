@@ -8,7 +8,6 @@ use src\validations\CharityValidation;
 
 class CharityController
 {
-
     private Charity $charity;
     public function __construct(private array $argv)
     {
@@ -27,14 +26,14 @@ class CharityController
     }
     public function store()
     {
-        if (!CharityValidation::inputs($this->argv)) {
+        if (!CharityValidation::hasValidInputCount($this->argv, 4)) {
             return CliPrinter::error('Too few/many arguments inserted, please run: php index.php create ["Charity name"] [Email address]');
         }
 
         $name = trim($this->argv[2], "'\"");
         $email = $this->argv[3];
 
-        if (!CharityValidation::name($name)) {
+        if (!CharityValidation::hasValidNameLength($name, 8, 50)) {
             return CliPrinter::error("Charity name should be 8-50 characters long");
         }
 
@@ -47,7 +46,7 @@ class CharityController
     }
     public function update()
     {
-        if (!CharityValidation::inputs($this->argv)) {
+        if (!CharityValidation::hasValidInputCount($this->argv, 5)) {
             return CliPrinter::error('Too few/many arguments inserted, please run: php index.php edit [Charity id] ["New charity name"] [New email address]');
         }
 
@@ -55,7 +54,7 @@ class CharityController
         $name = trim($this->argv[3], "'\"");
         $email = $this->argv[4];
 
-        if (!CharityValidation::name($name)) {
+        if (!CharityValidation::hasValidNameLength($name, 8, 50)) {
             return CliPrinter::error("Charity name should be 8-50 characters long");
         }
         if (!CharityValidation::email($email)) {
@@ -63,7 +62,7 @@ class CharityController
         }
         if (!$this->find($id)) {
             return CliPrinter::error("Charity with this id: $id does not exist");
-        };
+        }
         $this->charity->update($id, $name, $email);
         CliPrinter::message("Charity successfully updated");
     }
@@ -72,7 +71,7 @@ class CharityController
         $id = $this->argv[2];
         if (!$this->find($id)) {
             return CliPrinter::error("Charity with this id: $id does not exist");
-        };
+        }
 
         $this->charity->destroy($id);
         CliPrinter::message("Charity successfully deleted");
@@ -86,14 +85,14 @@ class CharityController
     public function csv()
     {
         $fileName = $this->argv[2];
-        $csvFileLocation = CSVlocation . $fileName;
+        $csvFileLocation = CSVLOCATION . $fileName;
 
         $file = fopen($csvFileLocation, 'r');
 
         $id = 0;
         $charitiesAdded = 0;
 
-        while (($data = fgetcsv($file, 1000, ',')) !== FALSE) {
+        while (($data = fgetcsv($file, 1000, ',')) !== false) {
             $id++;
             if (count($data) < 2) {
                 CliPrinter::error("To few arguments passed in row $id");
@@ -109,7 +108,7 @@ class CharityController
                 CliPrinter::error("Email is not valid in row $id");
                 continue;
             }
-            if (!CharityValidation::name($name)) {
+            if (!CharityValidation::hasValidNameLength($name, 8, 50)) {
                 CliPrinter::error("Charity name should be 8-50 characters long in row $id");
                 continue;
             }

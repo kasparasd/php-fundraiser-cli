@@ -9,7 +9,7 @@ class CreateTables
 {
     public static function create()
     {
-        $config = (new MariaDbConfig(ENV))->mariaDbConfig();
+        $config = (new MariaDbConfig())->mariaDbConfig();
         $dbName = $config['database'];
         $host = $config['host'];
         $user = $config['user'];
@@ -37,7 +37,7 @@ class CreateTables
                 name VARCHAR( 128 ) NOT NULL,
                 email VARCHAR( 128 ) NOT NULL)
             ");
-            
+
             $conn->exec("CREATE TABLE IF NOT EXISTS donations (
                 id INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
                 donor_name VARCHAR( 128 ) NOT NULL,

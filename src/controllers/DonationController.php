@@ -7,7 +7,6 @@ use src\models\Donation;
 
 class DonationController
 {
-
     private Donation $donation;
     public function __construct(private array $argv)
     {

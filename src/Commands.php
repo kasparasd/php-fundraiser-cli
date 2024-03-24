@@ -33,7 +33,8 @@ class Commands
 
         $command = $this->getCommand($command_name);
         if ($command === null) {
-            CliPrinter::error("ERROR: Command \"$command_name\" not found. To check available commands run: php index.php help ");
+            CliPrinter::error("ERROR: Command \"$command_name\" not found.
+             To check available commands run: php index.php help ");
             exit;
         }
 

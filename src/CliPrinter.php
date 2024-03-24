@@ -10,10 +10,10 @@ class CliPrinter
         fwrite(STDOUT, $message);
         fwrite(STDOUT, "\n");
     }
-    public static function error($message){
+    public static function error($message)
+    {
         fwrite(STDOUT, "\n");
-        fwrite(STDERR, 'ERROR: '.$message);
+        fwrite(STDERR, 'ERROR: ' . $message);
         fwrite(STDOUT, "\n");
-
     }
 }
